@@ -10,6 +10,9 @@ function! xolox#notes#templates#next(bang, title)
     let l:template = g:notes_new_note_template
     let g:notes_new_note_template = g:notes_templates[next_index]
     let l:next_index = l:next_index + 1
+    if (len(g:notes_templates) == l:next_index)
+        let l:next_index = 0
+    endif
     call writefile([l:next_index], glob(l:index_file))
     let l:date = strftime("%c")
     call xolox#notes#edit('!', l:date)
