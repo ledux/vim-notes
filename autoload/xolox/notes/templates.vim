@@ -5,9 +5,20 @@
 " URL:
 
 function! xolox#notes#templates#next(bang, title)
+    if !exists("g:notes_templates")
+        echoerr 'g:notes_templates is not set'
+        return
+    elseif type(g:notes_templates) != type([])
+        echoerr 'g:notes_templates has to be a list'
+        return
+    elseif len(g:notes_templates) == 0
+        echoerr 'g:notes_templates has no entries'
+        return
+    endif
+
     let l:index_file = '~/.vim/config/vim-notes/template_index'
     let l:next_index = readfile(glob(l:index_file))[0]
-    if (len(g:notes_templates) - 1 > l:next_index)
+    if len(g:notes_templates) - 1 > l:next_index
         let l:next_index = 0
     endif
 
