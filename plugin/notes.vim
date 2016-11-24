@@ -45,6 +45,8 @@ command! -bar -bang -range NoteFromSelectedText call xolox#notes#from_selection(
 command! -bar -bang -range SplitNoteFromSelectedText call xolox#notes#from_selection(<q-bang>, 'vsplit')
 command! -bar -bang -range TabNoteFromSelectedText call xolox#notes#from_selection(<q-bang>, 'tabnew')
 
+command! -bar -bang -nargs=? NewNextTemplate call xolox#notes#templates#next(<q-bang>, <q-args>)
+
 " Automatic commands to enable the :edit note:… shortcut and load the notes file type.
 
 augroup PluginNotes
