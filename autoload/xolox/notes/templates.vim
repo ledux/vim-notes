@@ -7,15 +7,15 @@
 function! xolox#notes#templates#next(bang, title)
     let l:index_file = '~/.vim/config/vim-notes/template_index'
     let l:next_index = readfile(glob(l:index_file))[0]
-    let l:template = g:notes_new_note_template
-    let g:notes_new_note_template = g:notes_templates[next_index]
-    let l:next_index = l:next_index + 1
-    if (len(g:notes_templates) == l:next_index)
+    if (len(g:notes_templates) - 1 > l:next_index)
         let l:next_index = 0
     endif
+
+    let l:template = g:notes_new_note_template
+    let g:notes_new_note_template = get(g:notes_templates, next_index)
+    let l:next_index = l:next_index + 1
     call writefile([l:next_index], glob(l:index_file))
     let l:date = strftime("%c")
     call xolox#notes#edit('!', l:date)
     let g:notes_new_note_template = l:template
-
 endfunction
